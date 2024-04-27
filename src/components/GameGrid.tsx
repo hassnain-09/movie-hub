@@ -1,6 +1,6 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import useMovies from "../hooks/useMovies";
-import GameCard from "./GameCard";
+import MovieCard from "./MovieCard";
 
 const GameGrid = () => {
   const { error, movies, genres } = useMovies();
@@ -14,7 +14,7 @@ const GameGrid = () => {
       >
         {movies &&
           movies.map((movie) => (
-            <GameCard key={movie.id} movie={movie} genres={genres} />
+            <MovieCard key={movie.id} movie={movie} genres={genres} />
           ))}
       </SimpleGrid>
     </div>

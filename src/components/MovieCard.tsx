@@ -1,12 +1,13 @@
-import { Card, CardBody, Heading, Image } from "@chakra-ui/react";
+import { Card, CardBody, HStack, Heading, Image } from "@chakra-ui/react";
 import { Genre, Movie } from "../hooks/useMovies";
 import GenreIconList from "./GenreIconList";
+import MovieRating from "./MovieRating";
 
 interface props {
   movie: Movie;
   genres: Genre[];
 }
-function GameCard({ movie, genres }: props) {
+function MovieCard({ movie, genres }: props) {
   const baseURL = "https://image.tmdb.org/t/p/w400/";
 
   return (
@@ -14,10 +15,13 @@ function GameCard({ movie, genres }: props) {
       <Image src={baseURL + movie.poster_path} objectFit={"cover"} />
       <CardBody>
         <Heading fontSize="2xl">{movie.original_title}</Heading>
-        <GenreIconList movie={movie} genres={genres} />
+        <HStack justifyContent="space-between">
+          <GenreIconList movie={movie} genres={genres} />
+          <MovieRating ratings={movie.vote_average} />
+        </HStack>
       </CardBody>
     </Card>
   );
 }
 
-export default GameCard;
+export default MovieCard;
