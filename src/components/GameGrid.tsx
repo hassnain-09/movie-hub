@@ -3,9 +3,15 @@ import useMovies from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
 import MovieCardContainer from "./MovieCardContainer";
+import useGenres, { Genre } from "../hooks/useGenres";
 
-const GameGrid = () => {
-  const { error, movies, genres, isLoading } = useMovies();
+interface props {
+  genre: Genre | null;
+}
+
+const GameGrid = ({ genre }: props) => {
+  const { error, movies, isLoading } = useMovies(genre);
+  const { data: genres } = useGenres();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
   return (
     <div>
@@ -17,14 +23,14 @@ const GameGrid = () => {
       >
         {isLoading &&
           skeletons.map((item) => (
-            <MovieCardContainer>
-              <MovieCardSkeleton key={item} />
+            <MovieCardContainer key={item}>
+              <MovieCardSkeleton />
             </MovieCardContainer>
           ))}
         {movies &&
           movies.map((movie) => (
-            <MovieCardContainer>
-              <MovieCard key={movie.id} movie={movie} genres={genres} />
+            <MovieCardContainer key={movie.id}>
+              <MovieCard movie={movie} genres={genres} />
             </MovieCardContainer>
           ))}
       </SimpleGrid>

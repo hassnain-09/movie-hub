@@ -1,9 +1,14 @@
-import { HStack, Icon, List, ListItem, Spinner, Text } from "@chakra-ui/react";
+import { Button, HStack, Icon, List, ListItem } from "@chakra-ui/react";
 import useGenres from "../hooks/useGenres";
 import { iconMap } from "./GenreIconList";
 import GenreListSkeleton from "./GenreListSkeleton";
+import { Genre } from "../hooks/useMovies";
 
-function GenreList() {
+interface props {
+  onSelectGenre: (genre: Genre) => void;
+}
+
+function GenreList({ onSelectGenre }: props) {
   const { data, isLoading } = useGenres();
 
   return (
@@ -14,7 +19,13 @@ function GenreList() {
           <ListItem paddingY={1} key={item.id}>
             <HStack>
               <Icon as={iconMap[item.name]} color="gray.500" boxSize={5} />
-              <Text fontSize="lg">{item.name}</Text>
+              <Button
+                fontSize="lg"
+                variant="link"
+                onClick={() => onSelectGenre(item)}
+              >
+                {item.name}
+              </Button>
             </HStack>
           </ListItem>
         ))}

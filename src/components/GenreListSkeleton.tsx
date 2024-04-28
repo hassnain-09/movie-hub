@@ -1,13 +1,7 @@
-import {
-  HStack,
-  List,
-  ListItem,
-  Skeleton,
-  SkeletonText,
-} from "@chakra-ui/react";
+import { HStack, List, ListItem, Skeleton } from "@chakra-ui/react";
 
 function GenreListSkeleton() {
-  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 43];
+  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 81, 63, 52, 42, 43];
   return (
     <List>
       {data.map((item) => (

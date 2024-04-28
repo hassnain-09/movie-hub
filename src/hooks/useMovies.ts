@@ -15,10 +15,6 @@ export interface Movie {
     page: number;
     results: Movie[];
   }
-  interface FetchGenreRespone
-  {
-    genres:Genre[]
-  }
 
   export interface Genre
   {
@@ -27,23 +23,21 @@ export interface Movie {
   }
   
 
-const useMovies = ()=>{
+const useMovies = (genre:Genre | null)=>{
     const [error, setError] = useState("");
     const [movies, setMovies] = useState<Movie[]>([]);
-    const [genres,setGenres] = useState<Genre[]>([])
     const [isLoading,setLoading] = useState(true)
   
     useEffect(() => {
       setLoading(true)
       const controller = new AbortController();
   
-      APIClient.get<FetchMovieResponse>("discover/movie?api_key=0b15dd3d54bf72edddc232b20326bb9f&?language=en-US", { signal: controller.signal })
+      APIClient.get<FetchMovieResponse>("discover/movie?api_key=0b15dd3d54bf72edddc232b20326bb9f&?language=en-US", { signal: controller.signal,params:{
+        with_genres:genre? genre.id:''
+      } })
         .then((res) => {
           setMovies(res.data.results);
-          return APIClient.get<FetchGenreRespone>('genre/movie/list?api_key=0b15dd3d54bf72edddc232b20326bb9f')
-        }).then((res)=>{
-             setGenres(res.data.genres)
-             setLoading(false)
+          setLoading(false)
         })
         .catch((err) => {
           if (err instanceof CanceledError) return;
@@ -52,11 +46,11 @@ const useMovies = ()=>{
         });
   
       return () => controller.abort();
-    }, []);
+    }, [genre]);
 
 
 
-    return {error,movies,genres,isLoading}
+    return {error,movies,isLoading}
 }
 
 export default useMovies
