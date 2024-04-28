@@ -24,35 +24,35 @@ interface props {
   movie: Movie;
   genres: Genre[];
 }
+export const iconMap: { [key: string]: IconType } = {
+  Action: GiHighPunch,
+  Adventure: GiCircleForest,
+  Animation: GiBullyMinion,
+  Comedy: FaRegLaughSquint,
+  Crime: GiDeathJuice,
+  Documentary: PiFilmSlate,
+  Drama: GiSuspicious,
+  Family: MdFamilyRestroom,
+  Fantasy: FaFantasyFlightGames,
+  History: RiChatHistoryFill,
+  Horror: GiDaemonSkull,
+  Music: SiApplemusic,
+  Mystery: FaBookTanakh,
+  Romance: GiLovers,
+  "Science Fiction": GiSpaceship,
+  "TV Movie": PiTelevisionFill,
+  Thriller: ImConfused2,
+  War: GiBattleGear,
+  Western: GiWesternHat,
+};
 function GenreIconList({ movie, genres }: props) {
-  const iconMap: { [key: string]: IconType } = {
-    Action: GiHighPunch,
-    Adventure: GiCircleForest,
-    Animation: GiBullyMinion,
-    Comedy: FaRegLaughSquint,
-    Crime: GiDeathJuice,
-    Documentary: PiFilmSlate,
-    Drama: GiSuspicious,
-    Family: MdFamilyRestroom,
-    Fantasy: FaFantasyFlightGames,
-    History: RiChatHistoryFill,
-    Horror: GiDaemonSkull,
-    Music: SiApplemusic,
-    Mystery: FaBookTanakh,
-    Romance: GiLovers,
-    "Science Fiction": GiSpaceship,
-    "TV Movie": PiTelevisionFill,
-    Thriller: ImConfused2,
-    War: GiBattleGear,
-    Western: GiWesternHat,
-  };
   const filteredList = genres.filter((item) =>
     movie.genre_ids.find((obj) => obj === item.id)
   );
   return (
     <HStack marginY={2}>
       {filteredList.map((item) => (
-        <Icon as={iconMap[item.name]} color="gray.500" size="32px" />
+        <Icon as={iconMap[item.name]} color="gray.500" boxSize={5} />
       ))}
     </HStack>
   );
