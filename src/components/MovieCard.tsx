@@ -8,11 +8,11 @@ interface props {
   genres: Genre[];
 }
 function MovieCard({ movie, genres }: props) {
-  const baseURL = "https://image.tmdb.org/t/p/w400/";
+  const imageURL = "https://image.tmdb.org/t/p/w400/";
 
   return (
-    <Card borderRadius={10} overflow={"hidden"}>
-      <Image src={baseURL + movie.poster_path} objectFit={"cover"} />
+    <Card borderRadius={10} overflow={"hidden"} width="300px">
+      <Image src={imageURL + movie.poster_path} objectFit={"cover"} />
       <CardBody>
         <Heading fontSize="2xl">{movie.original_title}</Heading>
         <HStack justifyContent="space-between">

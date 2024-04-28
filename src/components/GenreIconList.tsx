@@ -52,7 +52,7 @@ function GenreIconList({ movie, genres }: props) {
   return (
     <HStack marginY={2}>
       {filteredList.map((item) => (
-        <Icon as={iconMap[item.name]} color="gray.500" />
+        <Icon as={iconMap[item.name]} color="gray.500" size="32px" />
       ))}
     </HStack>
   );

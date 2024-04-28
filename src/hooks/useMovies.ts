@@ -31,8 +31,10 @@ const useMovies = ()=>{
     const [error, setError] = useState("");
     const [movies, setMovies] = useState<Movie[]>([]);
     const [genres,setGenres] = useState<Genre[]>([])
+    const [isLoading,setLoading] = useState(true)
   
     useEffect(() => {
+      setLoading(true)
       const controller = new AbortController();
   
       APIClient.get<FetchMovieResponse>("discover/movie?api_key=0b15dd3d54bf72edddc232b20326bb9f&?language=en-US", { signal: controller.signal })
@@ -41,10 +43,12 @@ const useMovies = ()=>{
           return APIClient.get<FetchGenreRespone>('genre/movie/list?api_key=0b15dd3d54bf72edddc232b20326bb9f')
         }).then((res)=>{
              setGenres(res.data.genres)
+             setLoading(false)
         })
         .catch((err) => {
           if (err instanceof CanceledError) return;
           setError(`${err}`);
+          setLoading(false)
         });
   
       return () => controller.abort();
@@ -52,7 +56,7 @@ const useMovies = ()=>{
 
 
 
-    return {error,movies,genres}
+    return {error,movies,genres,isLoading}
 }
 
 export default useMovies
