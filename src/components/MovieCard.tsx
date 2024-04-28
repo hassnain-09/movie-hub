@@ -11,7 +11,7 @@ function MovieCard({ movie, genres }: props) {
   const imageURL = "https://image.tmdb.org/t/p/w400/";
 
   return (
-    <Card borderRadius={10} overflow={"hidden"} width="300px">
+    <Card>
       <Image src={imageURL + movie.poster_path} objectFit={"cover"} />
       <CardBody>
         <Heading fontSize="2xl">{movie.original_title}</Heading>

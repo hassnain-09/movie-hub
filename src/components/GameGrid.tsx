@@ -2,6 +2,7 @@ import { SimpleGrid } from "@chakra-ui/react";
 import useMovies from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
+import MovieCardContainer from "./MovieCardContainer";
 
 const GameGrid = () => {
   const { error, movies, genres, isLoading } = useMovies();
@@ -14,10 +15,17 @@ const GameGrid = () => {
         spacing={10}
         padding="10px"
       >
-        {isLoading && skeletons.map((item) => <MovieCardSkeleton key={item} />)}
+        {isLoading &&
+          skeletons.map((item) => (
+            <MovieCardContainer>
+              <MovieCardSkeleton key={item} />
+            </MovieCardContainer>
+          ))}
         {movies &&
           movies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} genres={genres} />
+            <MovieCardContainer>
+              <MovieCard key={movie.id} movie={movie} genres={genres} />
+            </MovieCardContainer>
           ))}
       </SimpleGrid>
     </div>
