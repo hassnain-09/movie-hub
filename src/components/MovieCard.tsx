@@ -15,7 +15,7 @@ function MovieCard({ movie, genres }: props) {
       <Image src={imageURL + movie.poster_path} objectFit={"cover"} />
       <CardBody>
         <Heading fontSize="2xl" marginBottom={3}>
-          {movie.original_title}
+          {movie.title}
         </Heading>
         <HStack justifyContent="space-between">
           <GenreIconList movie={movie} genres={genres} />

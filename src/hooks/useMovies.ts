@@ -10,6 +10,7 @@ export interface Movie {
     poster_path:string;
     genre_ids:number[];
     vote_average:number;
+    title:string
   }
   
   interface FetchMovieResponse {
@@ -36,6 +37,7 @@ const useMovies = (movieQuery:MovieQuery)=>{
       APIClient.get<FetchMovieResponse>("discover/movie?api_key=0b15dd3d54bf72edddc232b20326bb9f&?language=en-US", { signal: controller.signal,params:{
         with_genres:movieQuery.genre?.id,
         with_origin_country: movieQuery.country?.iso_3166_1,
+        sort_by:movieQuery.order_by_option? (movieQuery.order_by_option=="title"?movieQuery.order_by_option+'.asc':movieQuery.order_by_option+'.desc'):''
       } })
         .then((res) => {
           setMovies(res.data.results);

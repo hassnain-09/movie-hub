@@ -1,4 +1,4 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
@@ -7,10 +7,12 @@ import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
 import CountrySelector from "./components/CountrySelector";
 import { Country } from "./hooks/useCountires";
+import OrderBySelector from "./components/OrderBySelector";
 
 export interface MovieQuery {
   genre: Genre | null;
   country: Country | null;
+  order_by_option: string | null;
 }
 
 function App() {
@@ -41,12 +43,20 @@ function App() {
           </GridItem>
         </Show>
         <GridItem area={"main"}>
-          <CountrySelector
-            onSelectedCountry={(country) =>
-              setMovieQuery({ ...movieQuery, country })
-            }
-            selectedCountry={movieQuery.country}
-          />
+          <HStack paddingX={3} marginBottom={2}>
+            <CountrySelector
+              onSelectedCountry={(country) =>
+                setMovieQuery({ ...movieQuery, country })
+              }
+              selectedCountry={movieQuery.country}
+            />
+            <OrderBySelector
+              selectedOrderByOption={movieQuery.order_by_option}
+              onOrderOptionSelect={(order_by_option) =>
+                setMovieQuery({ ...movieQuery, order_by_option })
+              }
+            />
+          </HStack>
           <GameGrid movieQuery={movieQuery} />
         </GridItem>
       </Grid>
