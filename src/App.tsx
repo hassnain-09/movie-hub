@@ -6,9 +6,11 @@ import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
 import CountrySelector from "./components/CountrySelector";
+import { Country } from "./hooks/useCountires";
 
 function App() {
   const [selectedGenre, setSelectGenre] = useState<Genre | null>(null);
+  const [selectedCountry, setSelectCountry] = useState<Country | null>(null);
   return (
     <>
       <Grid
@@ -33,8 +35,11 @@ function App() {
           </GridItem>
         </Show>
         <GridItem area={"main"}>
-          <CountrySelector />
-          <GameGrid genre={selectedGenre} />
+          <CountrySelector
+            onSelectedCountry={(country) => setSelectCountry(country)}
+            selectedCountry={selectedCountry}
+          />
+          <GameGrid genre={selectedGenre} country={selectedCountry} />
         </GridItem>
       </Grid>
     </>

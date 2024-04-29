@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CanceledError } from "axios";
 import APIClient from "../services/api-client";
 
-interface Country
+export interface Country
 {
     iso_3166_1:string,
     english_name:string,

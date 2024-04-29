@@ -4,13 +4,15 @@ import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
 import MovieCardContainer from "./MovieCardContainer";
 import useGenres, { Genre } from "../hooks/useGenres";
+import { Country } from "../hooks/useCountires";
 
 interface props {
   genre: Genre | null;
+  country: Country | null;
 }
 
-const GameGrid = ({ genre }: props) => {
-  const { error, movies, isLoading } = useMovies(genre);
+const GameGrid = ({ genre, country }: props) => {
+  const { error, movies, isLoading } = useMovies(genre, country);
   const { data: genres } = useGenres();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
   return (
