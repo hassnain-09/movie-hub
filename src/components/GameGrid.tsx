@@ -3,16 +3,16 @@ import useMovies from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
 import MovieCardContainer from "./MovieCardContainer";
-import useGenres, { Genre } from "../hooks/useGenres";
-import { Country } from "../hooks/useCountires";
+import useGenres from "../hooks/useGenres";
+
+import { MovieQuery } from "../App";
 
 interface props {
-  genre: Genre | null;
-  country: Country | null;
+  movieQuery: MovieQuery;
 }
 
-const GameGrid = ({ genre, country }: props) => {
-  const { error, movies, isLoading } = useMovies(genre, country);
+const GameGrid = ({ movieQuery }: props) => {
+  const { error, movies, isLoading } = useMovies(movieQuery);
   const { data: genres } = useGenres();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
   return (

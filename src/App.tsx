@@ -8,9 +8,15 @@ import { Genre } from "./hooks/useGenres";
 import CountrySelector from "./components/CountrySelector";
 import { Country } from "./hooks/useCountires";
 
+export interface MovieQuery {
+  genre: Genre | null;
+  country: Country | null;
+}
+
 function App() {
-  const [selectedGenre, setSelectGenre] = useState<Genre | null>(null);
-  const [selectedCountry, setSelectCountry] = useState<Country | null>(null);
+  // const [selectedGenre, setSelectGenre] = useState<Genre | null>(null);
+  // const [selectedCountry, setSelectCountry] = useState<Country | null>(null);
+  const [movieQuery, setMovieQuery] = useState<MovieQuery>({} as MovieQuery);
   return (
     <>
       <Grid
@@ -29,17 +35,19 @@ function App() {
         <Show above="lg">
           <GridItem area="aside" paddingX={4}>
             <GenreList
-              onSelectGenre={(genre) => setSelectGenre(genre)}
-              selectedGenre={selectedGenre}
+              onSelectGenre={(genre) => setMovieQuery({ ...movieQuery, genre })}
+              selectedGenre={movieQuery.genre}
             />
           </GridItem>
         </Show>
         <GridItem area={"main"}>
           <CountrySelector
-            onSelectedCountry={(country) => setSelectCountry(country)}
-            selectedCountry={selectedCountry}
+            onSelectedCountry={(country) =>
+              setMovieQuery({ ...movieQuery, country })
+            }
+            selectedCountry={movieQuery.country}
           />
-          <GameGrid genre={selectedGenre} country={selectedCountry} />
+          <GameGrid movieQuery={movieQuery} />
         </GridItem>
       </Grid>
     </>
