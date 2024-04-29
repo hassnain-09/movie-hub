@@ -17,7 +17,7 @@ const useData = <T>(endpoint:string)=>{
       setLoading(true)
       const controller = new AbortController();
   
-       APIClient.get<FetchRespone<T>>(endpoint).then(res=>{
+       APIClient.get<FetchRespone<T>>(endpoint,{signal:controller.signal}).then(res=>{
         setData(res.data.genres)
         setLoading(false)
        }).catch(err=>{
@@ -34,5 +34,6 @@ const useData = <T>(endpoint:string)=>{
 
     return {error,data,isLoading}
 }
+
 
 export default useData
