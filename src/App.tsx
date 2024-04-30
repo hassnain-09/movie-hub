@@ -8,6 +8,7 @@ import { Genre } from "./hooks/useGenres";
 import CountrySelector from "./components/CountrySelector";
 import { Country } from "./hooks/useCountires";
 import OrderBySelector from "./components/OrderBySelector";
+import MovieHeading from "./components/MovieHeading";
 
 export interface MovieQuery {
   genre: Genre | null;
@@ -54,6 +55,7 @@ function App() {
           </GridItem>
         </Show>
         <GridItem area={"main"}>
+          <MovieHeading movieQuery={movieQuery} />
           <HStack paddingX={3} marginBottom={2}>
             <CountrySelector
               onSelectedCountry={(country) =>
