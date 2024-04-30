@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
-import { CanceledError } from "axios";
-import APIClient from "../services/api-client";
+// import { useEffect, useState } from "react";
+// import { CanceledError } from "axios";
+// import APIClient from "../services/api-client";
+
+import countries from "../data/countries"
 
 export interface Country
 {
@@ -9,32 +11,42 @@ export interface Country
 
 }
 
-const useCountries = ()=>{
-    const [error, setError] = useState("");
-    const [countries, setCountries] = useState<Country[]>([]);
-    const [isLoading,setLoading] = useState(true)
+
+
+// const useCountries = ()=>{
+//     const [error, setError] = useState("");
+//     const [countries, setCountries] = useState<Country[]>([]);
+//     const [isLoading,setLoading] = useState(true)
   
-    useEffect(() => {
-      setLoading(true)
-      const controller = new AbortController();
+//     useEffect(() => {
+//       setLoading(true)
+//       const controller = new AbortController();
   
-      APIClient.get("configuration/countries?api_key=0b15dd3d54bf72edddc232b20326bb9f&?language=en-US", { signal: controller.signal })
-        .then((res) => {
-          setCountries(res.data);
-          setLoading(false)
-        })
-        .catch((err) => {
-          if (err instanceof CanceledError) return;
-          setError(`${err}`);
-          setLoading(false)
-        });
+//       APIClient.get("configuration/countries?api_key=0b15dd3d54bf72edddc232b20326bb9f&?language=en-US", { signal: controller.signal })
+//         .then((res) => {
+//           setCountries(res.data);
+//           setLoading(false)
+//         })
+//         .catch((err) => {
+//           if (err instanceof CanceledError) return;
+//           setError(`${err}`);
+//           setLoading(false)
+//         });
   
-      return () => controller.abort();
-    },[]);
+//       return () => controller.abort();
+//     },[]);
 
 
 
-    return {error,countries,isLoading}
+//     return {error,countries,isLoading}
+// }
+
+const useCountries = () => {
+  return {
+    error:"",
+    countries: countries,
+    isLoading:false
+  }
 }
 
 export default useCountries
