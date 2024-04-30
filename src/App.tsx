@@ -13,6 +13,7 @@ export interface MovieQuery {
   genre: Genre | null;
   country: Country | null;
   order_by_option: string | null;
+  search_input: string | null;
 }
 
 function App() {
@@ -32,12 +33,22 @@ function App() {
         }}
       >
         <GridItem area="nav">
-          <NavBar />
+          <NavBar
+            onFormSubmition={(search_input) =>
+              setMovieQuery({ ...movieQuery, search_input })
+            }
+          />
         </GridItem>
         <Show above="lg">
           <GridItem area="aside" paddingX={4}>
             <GenreList
-              onSelectGenre={(genre) => setMovieQuery({ ...movieQuery, genre })}
+              onSelectGenre={(genre) =>
+                setMovieQuery({
+                  ...movieQuery,
+                  search_input: null,
+                  genre,
+                })
+              }
               selectedGenre={movieQuery.genre}
             />
           </GridItem>
@@ -46,14 +57,18 @@ function App() {
           <HStack paddingX={3} marginBottom={2}>
             <CountrySelector
               onSelectedCountry={(country) =>
-                setMovieQuery({ ...movieQuery, country })
+                setMovieQuery({ ...movieQuery, search_input: null, country })
               }
               selectedCountry={movieQuery.country}
             />
             <OrderBySelector
               selectedOrderByOption={movieQuery.order_by_option}
               onOrderOptionSelect={(order_by_option) =>
-                setMovieQuery({ ...movieQuery, order_by_option })
+                setMovieQuery({
+                  ...movieQuery,
+                  search_input: null,
+                  order_by_option,
+                })
               }
             />
           </HStack>

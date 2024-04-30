@@ -29,10 +29,11 @@ function OrderBySelector({
             : "Order by:"}
         </MenuButton>
         <MenuList minWidth="240px" overflowY="auto" maxHeight="300px">
-          {order_by_options.map((option) => (
+          {order_by_options.map((option, index) => (
             <MenuItem
               value={option}
               onClick={() => onOrderOptionSelect(option)}
+              key={index}
             >
               {option
                 .split("_")
