@@ -2,6 +2,7 @@ import { Card, CardBody, HStack, Heading, Image } from "@chakra-ui/react";
 import { Genre, Movie } from "../hooks/useMovies";
 import GenreIconList from "./GenreIconList";
 import MovieRating from "./MovieRating";
+import noImage from "../assets/no-image-placeholder.webp";
 
 interface props {
   movie: Movie;
@@ -12,7 +13,11 @@ function MovieCard({ movie, genres }: props) {
 
   return (
     <Card>
-      <Image src={imageURL + movie.poster_path} objectFit={"cover"} />
+      <Image
+        src={(movie.poster_path && imageURL + movie.poster_path) || noImage}
+        objectFit="cover"
+        height="550px"
+      />
       <CardBody>
         <Heading fontSize="2xl" marginBottom={3}>
           {movie.title}
