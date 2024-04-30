@@ -19,13 +19,13 @@ function MovieCard({ movie, genres }: props) {
         height="550px"
       />
       <CardBody>
-        <Heading fontSize="2xl" marginBottom={3}>
-          {movie.title}
-        </Heading>
-        <HStack justifyContent="space-between">
+        <HStack justifyContent="space-between" marginBottom={3}>
           <GenreIconList movie={movie} genres={genres} />
           <MovieRating ratings={movie.vote_average} />
         </HStack>
+        <Heading fontSize="2xl" marginBottom={1}>
+          {movie.title}
+        </Heading>
       </CardBody>
     </Card>
   );

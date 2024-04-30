@@ -1,4 +1,11 @@
-import { Button, HStack, Icon, List, ListItem } from "@chakra-ui/react";
+import {
+  Button,
+  HStack,
+  Heading,
+  Icon,
+  List,
+  ListItem,
+} from "@chakra-ui/react";
 import useGenres from "../hooks/useGenres";
 import { iconMap } from "./GenreIconList";
 import GenreListSkeleton from "./GenreListSkeleton";
@@ -14,6 +21,9 @@ function GenreList({ onSelectGenre, selectedGenre }: props) {
 
   return (
     <>
+      <Heading fontSize="2xl" marginBottom={3}>
+        Genres
+      </Heading>
       {isLoading && <GenreListSkeleton></GenreListSkeleton>}
       <List>
         {data.map((item) => (
